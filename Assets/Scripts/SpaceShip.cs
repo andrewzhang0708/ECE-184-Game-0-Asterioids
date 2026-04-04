@@ -4,7 +4,7 @@ public class Spaceship : MonoBehaviour
 {
     private float turnSpeed = 180f;
 
-    [SerializeField] private float thrust = 5f;
+    [SerializeField] private float thrust = 0.35f;
 
     private Vector3 shipDirection = new Vector3(0, 1, 0);
 
@@ -73,5 +73,25 @@ public class Spaceship : MonoBehaviour
         }
 
         WrapAround();
+    }
+
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Asteroid"))
+    //    {
+    //        FindObjectOfType<GameController>().PlayerDied();
+
+    //        Destroy(gameObject); // destroy player
+    //    }
+    //}
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            FindFirstObjectByType<GameController>().PlayerDied();
+
+            Destroy(gameObject); // destroy player
+        }
     }
 }
